@@ -1,2 +1,11 @@
-# full-stack-reddit-clone
-# full-stack-reddit-clone
+# Full Stack Reddit Clone
+
+### Using: 
+ - GraphQL
+ - PostgreSQL
+ - Next.js
+ - React
+ - Mikro
+ - Apollo
+ - Express
+ - Redis
