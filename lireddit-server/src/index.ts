@@ -11,7 +11,7 @@ import { UserResolver } from './resolvers/user';
 import session from "express-session";
 import connectRedis from 'connect-redis';
 import { MyContext } from './types';
-
+import cors from "cors";
 
 
 const main = async () => {
@@ -24,6 +24,11 @@ const main = async () => {
     const { createClient } = require("redis")
     let redisClient = createClient({ legacyMode: true })
     redisClient.connect().catch(console.error)
+
+    app.use(cors({
+        origin: "http://localhost:3000",
+        credentials: true
+    }))
 
     app.use(
         session({
@@ -52,7 +57,7 @@ const main = async () => {
         context: ({req, res}): MyContext => ({em: orm.em, req, res}),
     });
     await apolloServer.start();
-    apolloServer.applyMiddleware({app});
+    apolloServer.applyMiddleware({app, cors: false});
     
     app.listen(4000, () => {
         console.log('server started on localhost:4000')
